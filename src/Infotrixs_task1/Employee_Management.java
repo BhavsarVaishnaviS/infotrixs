@@ -82,6 +82,23 @@ public class Employee_Management extends JFrame {
         });
         buttonPanel.add(updateButton);
         
+        JButton deleteButton = new JButton("Delete");
+        deleteButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            	deleteEmployee();
+            }
+        });
+        buttonPanel.add(deleteButton);
+        
+        JButton searchButton = new JButton("Search");
+        searchButton.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		searchEmployee();
+        	}
+        });
+        buttonPanel.add(searchButton);
+        
         return buttonPanel;
     }
 
@@ -128,10 +145,43 @@ public class Employee_Management extends JFrame {
     }
 
 
+    private void deleteEmployee() {
+        int id = Integer.parseInt(idField.getText());
+        Employee employeeToDelete = findEmployeeById(id);
+        if (employeeToDelete != null) {
+            employees.remove(employeeToDelete);
+            saveEmployeesToFile();
+            JOptionPane.showMessageDialog(this, "Employee deleted successfully.");
+        } else {
+            JOptionPane.showMessageDialog(this, "Employee with ID " + id + " not found.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        clearFields();
+    }
+
     private Employee findEmployeeById(int id) {
-		// TODO Auto-generated method stub
 		return null;
 	}
+
+	private void searchEmployee() {
+        String name = nameField.getText().trim();
+        List<Employee> foundEmployees = new ArrayList<>();
+        for (Employee employee : employees) {
+            if (employee.getName().equalsIgnoreCase(name)) {
+                foundEmployees.add(employee);
+            }
+        }
+
+        if (foundEmployees.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "No employees found with the name: " + name, "Not Found", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            StringBuilder employeeInfo = new StringBuilder();
+            for (Employee employee : foundEmployees) {
+                employeeInfo.append(employee).append("\n");
+            }
+            JOptionPane.showMessageDialog(this, employeeInfo.toString(), "Employees Found", JOptionPane.INFORMATION_MESSAGE);
+        }
+        clearFields();
+    }
 
 	private void clearFields() {
         idField.setText("");
