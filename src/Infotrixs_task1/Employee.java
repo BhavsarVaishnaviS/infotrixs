@@ -26,4 +26,40 @@ public class Employee implements Serializable {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+
+	public int getId() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+
+	public void setName(String newName) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	public void setAge(String newAge) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	public int getSalary() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+
+	public int getAge() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+
+	public void setSalary(double newSalary) {
+		// TODO Auto-generated method stub
+		
+	}
 }

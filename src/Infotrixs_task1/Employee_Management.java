@@ -119,31 +119,12 @@ public class Employee_Management extends JFrame {
             JOptionPane.showMessageDialog(this, "No employees found.");
         } else {
             StringBuilder employeeInfo = new StringBuilder();
-            for (Employee employee : employees) {
+            for (Employee employee : employees) {	
                 employeeInfo.append(employee).append("\n");
             }
             JOptionPane.showMessageDialog(this, employeeInfo.toString(), "Employees", JOptionPane.INFORMATION_MESSAGE);
         }
     }
-
-    private void updateEmployee() {
-        int id = Integer.parseInt(idField.getText());
-        String name = nameField.getText();
-        int age = Integer.parseInt(ageField.getText());
-        double salary = Double.parseDouble(salaryField.getText());
-        Employee updatedEmployee = new Employee(id, name, age, salary);
-
-        Employee employeeToUpdate = findEmployeeById(id);
-        if (employeeToUpdate != null) {
-            employees.set(employees.indexOf(employeeToUpdate), updatedEmployee);
-            saveEmployeesToFile();
-            JOptionPane.showMessageDialog(this, "Employee updated successfully.");
-        } else {
-            JOptionPane.showMessageDialog(this, "Employee with ID " + id + " not found.", "Error", JOptionPane.ERROR_MESSAGE);
-        }
-        clearFields();
-    }
-
 
     private void deleteEmployee() {
         int id = Integer.parseInt(idField.getText());
@@ -157,6 +138,25 @@ public class Employee_Management extends JFrame {
         }
         clearFields();
     }
+
+    private void updateEmployee() {
+        int id = Integer.parseInt(idField.getText());
+        Employee employeeToUpdate = findEmployeeById(id);
+        if (employeeToUpdate != null) {
+            String name = nameField.getText();
+            int age = Integer.parseInt(ageField.getText());
+            double salary = Double.parseDouble(salaryField.getText());
+            Employee updatedEmployee = new Employee(id, name, age, salary);
+
+            employees.set(employees.indexOf(employeeToUpdate), updatedEmployee);
+            saveEmployeesToFile();
+            JOptionPane.showMessageDialog(this, "Employee updated successfully.");
+        } else {
+            JOptionPane.showMessageDialog(this, "Employee with ID " + id + " not found.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        clearFields();
+    }
+
 
     private Employee findEmployeeById(int id) {
 		return null;
